@@ -195,6 +195,11 @@ algorithmSelect = input()
 
 df = pd.read_fwf(fileName, header=None, inplace=True).values
 print("This dataset has", df.shape[1]-1, "features (not including the class attribute), with", df.shape[0], "instances")
+
+unique, counts = np.unique(df[:,0], return_counts=True)
+default_rate = max(counts) / df.shape[0]
+print("The default rate of this dataset is", default_rate)
+
 accuracy_w_all_features = base_validation(df) * 100
 if(algorithmSelect == '1'):
     print("Running nearest neighbor with all", df.shape[1]-1, "features, using \"leaving-one-out\" evaluation, I get an accuracy of", accuracy_w_all_features, "%")
